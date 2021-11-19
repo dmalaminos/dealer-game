@@ -5,14 +5,26 @@ class Game(
     private val player: Player,
     private val dealer: Player
 ) {
-    fun run(): Player {
+    var winner: Player? = null
+        private set
+
+    fun play() {
         dealInitialHands()
+        winner = calculateWinner()
+    }
 
+    private fun dealInitialHands() {
+        repeat(INITIAL_HAND_SIZE) {
+            player.takeCard(deck.draw())
+            dealer.takeCard(deck.draw())
+        }
+    }
+
+    private fun calculateWinner(): Player {
         if (hasBlackjack(player)) return player
-        if (hasBlackjack(dealer)) return dealer
-        if (bothPlayersHaveDoubleAce()) return dealer
+        if (hasBlackjack(dealer) || bothPlayersHaveDoubleAce()) return dealer
 
-        while (player.handScore < MAX_DRAWING_SCORE) {
+        while (player.handScore <= MAX_DRAWING_SCORE) {
             player.takeCard(deck.draw())
         }
         if (player.handScore > MAX_HAND_SCORE) {
@@ -29,19 +41,17 @@ class Game(
         return if (player.handScore > dealer.handScore) player else dealer
     }
 
-    private fun dealInitialHands() {
-        repeat(INITIAL_HAND_SIZE) {
-            player.takeCard(deck.draw())
-            dealer.takeCard(deck.draw())
-        }
-    }
+    private fun hasBlackjack(player: Player) = player.handScore == INITIAL_BLACKJACK_SCORE
 
-    private fun hasBlackjack(player: Player): Boolean {
-        return player.handScore == INITIAL_BLACKJACK_SCORE
-    }
+    private fun bothPlayersHaveDoubleAce() =
+        player.handScore == INITIAL_DOUBLE_ACE_SCORE && dealer.handScore == INITIAL_DOUBLE_ACE_SCORE
 
-    private fun bothPlayersHaveDoubleAce(): Boolean {
-        return player.handScore == INITIAL_DOUBLE_ACE_SCORE && dealer.handScore == INITIAL_DOUBLE_ACE_SCORE
+    override fun toString(): String {
+        return """
+            ${winner?.name ?: "No winner yet"}
+            $player
+            $dealer
+            """.trimIndent()
     }
 
     companion object {

@@ -12,4 +12,8 @@ class Player(val name: String) {
     fun takeCard(card: Card) {
         _hand.add(card)
     }
+
+    override fun toString(): String {
+        return "$name: ${_hand.joinToString(", ")}"
+    }
 }

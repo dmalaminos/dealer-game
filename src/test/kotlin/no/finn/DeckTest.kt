@@ -1,17 +1,19 @@
 package no.finn
 
+import no.finn.CardSuit.*
+import no.finn.CardValue.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class DeckTest {
     @Test
     fun shouldDrawCardsInCorrectOrder() {
-        val firstCard = Card(CardSuit.CLUB, CardValue.TWO)
-        val secondCard = Card(CardSuit.DIAMOND, CardValue.SEVEN)
+        val firstCard = Card(CLUB, TWO)
+        val secondCard = Card(DIAMOND, SEVEN)
         val cards = listOf(
             firstCard,
             secondCard,
-            Card(CardSuit.HEART, CardValue.QUEEN)
+            Card(HEART, QUEEN)
         )
 
         val deck = Deck(cards)
@@ -20,5 +22,19 @@ class DeckTest {
 
         assertEquals(firstCard, firstDraw)
         assertEquals(secondCard, secondDraw)
+    }
+
+    @Test
+    fun shouldHaveSameHashcodeWhenEqualDecks() {
+        val cards = listOf(
+            Card(CLUB, TWO),
+            Card(DIAMOND, SEVEN),
+            Card(HEART, QUEEN)
+        )
+
+        val firstDeck = Deck(cards)
+        val secondDeck = Deck(cards)
+
+        assertEquals(firstDeck.hashCode(), secondDeck.hashCode())
     }
 }

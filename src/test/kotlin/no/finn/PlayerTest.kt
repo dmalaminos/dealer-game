@@ -42,4 +42,13 @@ class PlayerTest {
 
         assertEquals(listOf(card), sammy.hand)
     }
+
+    @Test
+    fun shouldRepresentPlayerAsString() {
+        val sammy = Player("Sammy")
+        sammy.takeCard(Card(CardSuit.CLUB, CardValue.ACE))
+        sammy.takeCard(Card(CardSuit.HEART, CardValue.TEN))
+
+        assertEquals("Sammy: CA, H10", sammy.toString())
+    }
 }

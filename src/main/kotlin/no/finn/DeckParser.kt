@@ -2,7 +2,7 @@ package no.finn
 
 class DeckParser {
     fun parseFromString(deckString: String): Deck {
-        check(deckString.isNotEmpty()) { "Deck file is empty" }
+        check(deckString.isNotEmpty()) { "Deck string is empty" }
 
         val cards = deckString
             .split(CARD_SEPARATOR)

@@ -22,9 +22,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(sammy, winner)
+        assertEquals(sammy, game.winner)
         assertEquals(21, sammy.handScore)
     }
 
@@ -40,9 +40,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(dealer, winner)
+        assertEquals(dealer, game.winner)
         assertEquals(21, dealer.handScore)
         assertNotEquals(21, sammy.handScore)
     }
@@ -59,9 +59,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(sammy, winner)
+        assertEquals(sammy, game.winner)
         assertEquals(21, sammy.handScore)
         assertEquals(21, dealer.handScore)
     }
@@ -78,9 +78,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(dealer, winner)
+        assertEquals(dealer, game.winner)
         assertEquals(22, sammy.handScore)
         assertEquals(22, dealer.handScore)
     }
@@ -98,9 +98,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(dealer, winner)
+        assertEquals(dealer, game.winner)
         assertEquals(24, sammy.handScore)
         assertEquals(15, dealer.handScore)
     }
@@ -118,9 +118,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(sammy, winner)
+        assertEquals(sammy, game.winner)
         assertEquals(20, sammy.handScore)
         assertEquals(22, dealer.handScore)
     }
@@ -142,9 +142,9 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(sammy, winner)
+        assertEquals(sammy, game.winner)
         assertEquals(21, sammy.handScore)
         assertEquals(24, dealer.handScore)
     }
@@ -162,10 +162,33 @@ class GameTest {
         )
         val game = Game(deck, sammy, dealer)
 
-        val winner = game.run()
+        game.play()
 
-        assertEquals(dealer, winner)
+        assertEquals(dealer, game.winner)
         assertEquals(17, sammy.handScore)
         assertEquals(18, dealer.handScore)
+    }
+
+    @Test
+    fun shouldRepresentGameAsString() {
+        val deck = Deck(
+            listOf(
+                Card(CLUB, ACE),
+                Card(DIAMOND, TEN),
+                Card(HEART, SIX),
+                Card(HEART, SIX),
+                Card(CLUB, TWO)
+            )
+        )
+        val game = Game(deck, sammy, dealer)
+
+        game.play()
+
+        val expectedString = """
+            Dealer
+            Sammy: CA, H6
+            Dealer: D10, H6, C2
+            """.trimIndent()
+        assertEquals(expectedString, game.toString())
     }
 }

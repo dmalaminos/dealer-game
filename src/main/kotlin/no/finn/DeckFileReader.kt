@@ -11,7 +11,6 @@ class DeckFileReader {
             throw IllegalArgumentException("Deck file is not available at the specified path")
         }
 
-        check(deckString.isNotEmpty()) { "Deck file is empty" }
         return deckString
     }
 }
