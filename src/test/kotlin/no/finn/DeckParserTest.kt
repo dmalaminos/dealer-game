@@ -11,7 +11,7 @@ class DeckParserTest {
     fun shouldParseValidDeckFromFile() {
         val deck = deckParser.parseFromString("C10, CA, D5, DJ, H9, HQ, S2, SK")
 
-        val expectedDeck = ArrayDeque(
+        val expectedDeck = Deck(
             listOf(
                 Card(CardSuit.CLUB, CardValue.TEN),
                 Card(CardSuit.CLUB, CardValue.ACE),

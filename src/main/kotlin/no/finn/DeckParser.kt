@@ -1,14 +1,14 @@
 package no.finn
 
 class DeckParser {
-    fun parseFromString(deckString: String): ArrayDeque<Card> {
+    fun parseFromString(deckString: String): Deck {
         check(deckString.isNotEmpty()) { "Deck file is empty" }
 
         val cards = deckString
             .split(CARD_SEPARATOR)
             .map { parseCard(it) }
 
-        return ArrayDeque(cards)
+        return Deck(cards)
     }
 
     private fun parseCard(cardString: String): Card {
