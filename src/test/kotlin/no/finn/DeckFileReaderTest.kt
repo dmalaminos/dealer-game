@@ -20,11 +20,4 @@ class DeckFileReaderTest {
             deckFileReader.read("src/test/resources/unexisting-file.txt")
         }
     }
-
-    @Test
-    fun shouldFailToReadEmptyDeckFile() {
-        assertThrows(IllegalStateException::class.java) {
-            deckFileReader.read("src/test/resources/empty-deck.txt")
-        }
-    }
 }

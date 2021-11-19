@@ -1,9 +1,10 @@
 package no.finn
 
-class DeckReader(private val deckFileReader: DeckFileReader) {
-    fun readFromFile(filePath: String): ArrayDeque<Card> {
-        val cards = deckFileReader
-            .read(filePath)
+class DeckParser {
+    fun parseFromString(deckString: String): ArrayDeque<Card> {
+        check(deckString.isNotEmpty()) { "Deck file is empty" }
+
+        val cards = deckString
             .split(CARD_SEPARATOR)
             .map { parseCard(it) }
 
