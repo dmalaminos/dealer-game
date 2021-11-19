@@ -12,30 +12,40 @@ class DeckParser {
     }
 
     private fun parseCard(cardString: String): Card {
-        val suitChar = cardString.substring(0, 1)
-        val suit = if (suitChar.matches(Regex("[CDHS]"))) {
-            STRING_TO_CARD_SUIT.getValue(suitChar)
-        } else {
-            throw IllegalArgumentException("Invalid card suit $suitChar")
-        }
-
-        val valueChars = cardString.substring(1)
-        val value = if (valueChars.matches(Regex("[2-9]|10|[JQKA]"))) {
-            STRING_TO_CARD_VALUE.getValue(valueChars)
-        } else {
-            throw IllegalArgumentException("Invalid card value $valueChars")
-        }
+        val suit = parseSuit(cardString)
+        val value = parseValue(cardString)
 
         return Card(suit, value)
     }
 
+    private fun parseSuit(cardString: String): CardSuit {
+        val suitChar = cardString.substring(0, 1)
+        val suit = if (suitChar.matches(Regex(SUIT_REGEX))) {
+            STRING_TO_CARD_SUIT.getValue(suitChar)
+        } else {
+            throw IllegalArgumentException("Invalid card suit $suitChar")
+        }
+        return suit
+    }
+
+    private fun parseValue(cardString: String): CardValue {
+        val valueChars = cardString.substring(1)
+        val value = if (valueChars.matches(Regex(VALUE_REGEX))) {
+            STRING_TO_CARD_VALUE.getValue(valueChars)
+        } else {
+            throw IllegalArgumentException("Invalid card value $valueChars")
+        }
+        return value
+    }
+
     companion object {
         private const val CARD_SEPARATOR = ", "
+        private const val SUIT_REGEX = "[CDHS]"
+        private const val VALUE_REGEX = "[2-9]|10|[JQKA]"
 
         // Helper maps for parsing card suit and value
         private val STRING_TO_CARD_SUIT: MutableMap<String, CardSuit> = HashMap()
         private val STRING_TO_CARD_VALUE: MutableMap<String, CardValue> = HashMap()
-
         init {
             for (suit in CardSuit.values()) {
                 STRING_TO_CARD_SUIT[suit.name.substring(0, 1)] = suit
