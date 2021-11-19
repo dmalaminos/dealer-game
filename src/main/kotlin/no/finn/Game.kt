@@ -1,5 +1,7 @@
 package no.finn
 
+import no.finn.deck.Deck
+
 class Game(
     private val deck: Deck,
     private val player: Player,

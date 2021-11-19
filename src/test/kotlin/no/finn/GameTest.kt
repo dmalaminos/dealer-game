@@ -2,6 +2,7 @@ package no.finn
 
 import no.finn.CardSuit.*
 import no.finn.CardValue.*
+import no.finn.deck.Deck
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.test.assertNotEquals

@@ -1,5 +1,8 @@
-package no.finn
+package no.finn.deck
 
+import no.finn.Card
+import no.finn.CardSuit
+import no.finn.CardValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test

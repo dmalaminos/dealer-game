@@ -1,5 +1,10 @@
 package no.finn
 
+import no.finn.deck.Deck
+import no.finn.deck.DeckFileReader
+import no.finn.deck.DeckParser
+import no.finn.deck.RandomDeckGenerator
+
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {
@@ -15,11 +20,11 @@ object Main {
     }
 
     private fun getDeck(args: Array<String>): Deck {
-        val deckSupplier = DeckSupplier(DeckFileReader(), DeckParser(), RandomDeckGenerator())
         return if (args.size == 1) {
-            deckSupplier.fromFile(args[0])
+            val deckString = DeckFileReader().read(args[0])
+            return DeckParser().parseFromString(deckString)
         } else {
-            deckSupplier.random()
+            RandomDeckGenerator().generate()
         }
     }
 }

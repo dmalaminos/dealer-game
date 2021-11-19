@@ -1,4 +1,4 @@
-package no.finn
+package no.finn.deck
 
 import java.io.File
 import java.io.IOException

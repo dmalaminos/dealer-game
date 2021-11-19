@@ -1,4 +1,6 @@
-package no.finn
+package no.finn.deck
+
+import no.finn.Card
 
 class Deck(cards: List<Card>) {
     private val cards: ArrayDeque<Card>

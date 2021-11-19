@@ -1,4 +1,8 @@
-package no.finn
+package no.finn.deck
+
+import no.finn.Card
+import no.finn.CardSuit
+import no.finn.CardValue
 
 class DeckParser {
     fun parseFromString(deckString: String): Deck {

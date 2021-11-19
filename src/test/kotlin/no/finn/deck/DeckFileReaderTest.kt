@@ -1,4 +1,4 @@
-package no.finn
+package no.finn.deck
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
