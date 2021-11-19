@@ -20,4 +20,22 @@ enum class CardValue(val pointValue: Int) {
     ACE(11)
 }
 
-data class Card(val suit: CardSuit, val value: CardValue)
+data class Card(val suit: CardSuit, val value: CardValue) {
+    override fun toString() = stringify(this)
+
+    companion object StringCard {
+        fun stringify(card: Card): String {
+            val value = when (card.value.pointValue) {
+                in 2..9 -> card.value.pointValue.toString()
+                else -> when (card.value) {
+                    CardValue.TEN -> "10"
+                    CardValue.JACK -> "J"
+                    CardValue.QUEEN -> "Q"
+                    CardValue.KING -> "K"
+                    else -> "A"
+                }
+            }
+            return "${card.suit.name[0]}${value}"
+        }
+    }
+}

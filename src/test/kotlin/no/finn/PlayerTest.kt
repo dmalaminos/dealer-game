@@ -32,4 +32,14 @@ class PlayerTest {
         val sammy = Player("Sammy")
         assertEquals(0, sammy.handScore)
     }
+
+    @Test
+    fun shouldReturnHand() {
+        val sammy = Player("Sammy")
+        val card = Card(CardSuit.CLUB, CardValue.ACE)
+
+        sammy.takeCard(card)
+
+        assertEquals(listOf(card), sammy.hand)
+    }
 }
