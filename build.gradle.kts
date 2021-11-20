@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     application
 }
 
@@ -27,5 +26,5 @@ tasks.withType<KotlinCompile>() {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("no.finn.Main")
 }
