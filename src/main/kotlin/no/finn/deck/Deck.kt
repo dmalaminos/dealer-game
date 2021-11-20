@@ -3,11 +3,7 @@ package no.finn.deck
 import no.finn.Card
 
 class Deck(cards: List<Card>) {
-    private val cards: ArrayDeque<Card>
-
-    init {
-        this.cards = ArrayDeque(cards)
-    }
+    private val cards: ArrayDeque<Card> = ArrayDeque(cards)
 
     fun draw(): Card = cards.removeFirst()
 
