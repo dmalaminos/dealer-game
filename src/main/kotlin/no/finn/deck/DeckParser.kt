@@ -23,52 +23,23 @@ class DeckParser {
     }
 
     private fun parseSuit(cardString: String): CardSuit {
-        val suitChar = cardString.substring(0, 1)
-        val suit = if (suitChar.matches(Regex(SUIT_REGEX))) {
-            STRING_TO_CARD_SUIT.getValue(suitChar)
-        } else {
-            throw IllegalArgumentException("Invalid card suit $suitChar")
-        }
-        return suit
+        val suitChar = cardString.substring(SUIT_INDEX, VALUE_INDEX)
+        return STRING_TO_CARD_SUIT[suitChar] ?: throw IllegalArgumentException("Invalid card suit $suitChar")
+
     }
 
     private fun parseValue(cardString: String): CardValue {
-        val valueChars = cardString.substring(1)
-        val value = if (valueChars.matches(Regex(VALUE_REGEX))) {
-            STRING_TO_CARD_VALUE.getValue(valueChars)
-        } else {
-            throw IllegalArgumentException("Invalid card value $valueChars")
-        }
-        return value
+        val valueChars = cardString.substring(VALUE_INDEX)
+        return STRING_TO_CARD_VALUE[valueChars] ?: throw IllegalArgumentException("Invalid card value $valueChars")
     }
 
     companion object {
         private const val CARD_SEPARATOR = ", "
-        private const val SUIT_REGEX = "[CDHS]"
-        private const val VALUE_REGEX = "[2-9]|10|[JQKA]"
+        private const val SUIT_INDEX = 0
+        private const val VALUE_INDEX = 1
 
         // Helper maps for parsing card suit and value
-        private val STRING_TO_CARD_SUIT: MutableMap<String, CardSuit> = HashMap()
-        private val STRING_TO_CARD_VALUE: MutableMap<String, CardValue> = HashMap()
-        init {
-            for (suit in CardSuit.values()) {
-                STRING_TO_CARD_SUIT[suit.name.substring(0, 1)] = suit
-            }
-            for (value in CardValue.values()) {
-                if (value.pointValue < 10) {
-                    STRING_TO_CARD_VALUE[value.pointValue.toString()] = value
-                } else if (value == CardValue.TEN) {
-                    STRING_TO_CARD_VALUE["10"] = value
-                } else if (value == CardValue.JACK) {
-                    STRING_TO_CARD_VALUE["J"] = value
-                } else if (value == CardValue.QUEEN) {
-                    STRING_TO_CARD_VALUE["Q"] = value
-                } else if (value == CardValue.KING) {
-                    STRING_TO_CARD_VALUE["K"] = value
-                } else if (value == CardValue.ACE) {
-                    STRING_TO_CARD_VALUE["A"] = value
-                }
-            }
-        }
+        private val STRING_TO_CARD_SUIT: Map<String, CardSuit> = CardSuit.values().associateBy { it.toString() }
+        private val STRING_TO_CARD_VALUE: Map<String, CardValue> = CardValue.values().associateBy { it.toString() }
     }
 }

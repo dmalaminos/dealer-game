@@ -1,7 +1,9 @@
 package no.finn
 
 enum class CardSuit {
-    CLUB, DIAMOND, HEART, SPADE
+    CLUB, DIAMOND, HEART, SPADE;
+
+    override fun toString() = name[0].toString()
 }
 
 enum class CardValue(val pointValue: Int) {
@@ -17,18 +19,18 @@ enum class CardValue(val pointValue: Int) {
     JACK(10),
     QUEEN(10),
     KING(10),
-    ACE(11)
+    ACE(11);
+
+    override fun toString() =
+        when (pointValue) {
+            in 2..9 -> pointValue.toString()
+            else -> when (this) {
+                TEN -> "10"
+                else -> name[0].toString()
+            }
+        }
 }
 
 data class Card(val suit: CardSuit, val value: CardValue) {
-    override fun toString(): String {
-        val value = when (value.pointValue) {
-            in 2..9 -> value.pointValue.toString()
-            else -> when (value) {
-                CardValue.TEN -> "10"
-                else -> value.name[0]
-            }
-        }
-        return "${suit.name[0]}$value"
-    }
+    override fun toString() = "$suit$value"
 }
