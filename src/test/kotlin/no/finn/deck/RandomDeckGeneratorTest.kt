@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class RandomDeckGeneratorTest {
-
     private val randomDeckGenerator = RandomDeckGenerator()
 
     @Test
-    fun shouldReturnedDeckWith52UniqueCards() {
+    fun shouldReturnDeckWith52UniqueCards() {
         val deck = randomDeckGenerator.generate()
 
         val drawnCards = mutableListOf<Card>()

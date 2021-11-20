@@ -26,10 +26,7 @@ data class Card(val suit: CardSuit, val value: CardValue) {
             in 2..9 -> value.pointValue.toString()
             else -> when (value) {
                 CardValue.TEN -> "10"
-                CardValue.JACK -> "J"
-                CardValue.QUEEN -> "Q"
-                CardValue.KING -> "K"
-                else -> "A"
+                else -> value.name[0]
             }
         }
         return "${suit.name[0]}$value"

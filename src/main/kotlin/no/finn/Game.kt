@@ -48,13 +48,11 @@ class Game(
     private fun bothPlayersHaveDoubleAce() =
         player.handScore == INITIAL_DOUBLE_ACE_SCORE && dealer.handScore == INITIAL_DOUBLE_ACE_SCORE
 
-    override fun toString(): String {
-        return """
-            ${winner?.name ?: "No winner yet"}
-            $player
-            $dealer
-            """.trimIndent()
-    }
+    override fun toString() = """
+        ${winner?.name ?: "No winner yet"}
+        $player
+        $dealer
+        """.trimIndent()
 
     companion object {
         private const val INITIAL_HAND_SIZE = 2

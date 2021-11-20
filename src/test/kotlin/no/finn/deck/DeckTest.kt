@@ -26,7 +26,7 @@ class DeckTest {
     }
 
     @Test
-    fun shouldHaveSameHashcodeWhenEqualDecks() {
+    fun shouldHaveSameHashcodeForSameDecks() {
         val cards = listOf(
             Card(CLUB, TWO),
             Card(DIAMOND, SEVEN),

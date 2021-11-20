@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
 class CardTest {
-
     @Test
     fun shouldRepresentCardsAsString() {
         assertEquals("C9", Card(CLUB, NINE).toString())
